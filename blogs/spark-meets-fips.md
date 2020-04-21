@@ -167,12 +167,12 @@ Would produce the output containing:
         spark.io.encryption.commons.config.cipher.transformation       AES/CTR/PKCS5Padding
         
         #n/w
+        spark.network.crypto.enabled   true
+        spark.network.crypto.saslFallback 	false
         spark.network.crypto.keyLength    256
         spark.network.crypto.keyFactoryAlgorithm        PBKDF2WithHmacSHA256
         spark.network.crypto.config.secure.random.java.algorithm        PKCS11
         spark.network.crypto.config.cipher.transformation       AES/CTR/PKCS5Padding
-        spark.network.crypto.enabled   true
-        spark.network.crypto.keyLength  256
         spark.network.crypto.keyFactoryAlgorithm    PBKDF2WithHmacSHA256
         
         #SSL
