@@ -176,11 +176,18 @@ Would produce the output containing:
         spark.network.crypto.keyFactoryAlgorithm    PBKDF2WithHmacSHA256
         
         #SSL
-        spark.ssl.enabled true    
-        spark.ssl.enabledAlgorithms     TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-        spark.ssl.needClientAuth        true
-        spark.ssl.protocol      TLSv1.2
+        spark.ssl.enabled true
+        spark.ssl.keyPassword changeit!
+        spark.ssl.keyStorePassword changeit!
+        spark.ssl.keyStore /path/to/keystore
+        spark.ssl.keyStoreType pkcs12
+        spark.ssl.enabledAlgorithms    TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+        spark.ssl.needClientAuth     false
+        spark.ssl.protocol TLSv1.2
 
+You need to create a keystore, if it is not already available.
+
+        $ $JAVA_HOME/bin/keytool -genkey -storetype pkcs12 -keyalg RSA -alias spark -keystore /path/to/keystore
 
 Specify the above as `$SPARK_HOME/conf/spark-defaults.conf`
 
