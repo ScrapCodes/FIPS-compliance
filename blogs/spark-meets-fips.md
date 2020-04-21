@@ -36,10 +36,10 @@ This step is required because, java does not come with native implementation for
 Currently, [Mozilla NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS) is the only widely used open source
    implementation available. This library has a FIPS mode.
 
-1.1. Usually this library comes pre-installed on a RHEL system. So nothing to do, we can verify it's existence by:        
+1.1. Usually this library comes pre-installed on a RHEL system. Verify it's existence by:        
             ```$ readelf -d /lib64/libnss3.so```
                    
-1.2. However, if the latest version of this library is desired and also to enforce FIPS mode at the compile time. A
+1.2. However, if the latest version of this library is desired and to enforce FIPS mode at the compile time - a
  build from source is required. Note that, FIPS mode can also be enabled later, if not enforced at compile time.
 
   1.2.1. Download the latest version of Mozilla NSS library from their website and following the instructions provided.
