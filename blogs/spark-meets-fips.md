@@ -75,8 +75,7 @@ For this blog, oracle jdk 1.8 was used for testing the steps. The same steps mig
         attributes=compatibility
         showInfo=true
         nssModule=fips
-   
-     
+
 Save the above file as pkcs11.cfg and note its location.
 
 2.2 Edit JVM security providers to include PKCS11 module.
@@ -138,7 +137,7 @@ public class ListCryptoProviders {
         
         Java ListCryptoProviders
         
-Would produce the output containing:
+Should produce the output containing:
 
         SunPKCS11-NSS version 1.8
         ...
@@ -185,7 +184,7 @@ Would produce the output containing:
         spark.ssl.needClientAuth     false
         spark.ssl.protocol TLSv1.2
 
-You need to create a keystore, if it is not already available.
+In order to complete SSL setup, a keystore is required, it can be created as follows, if it is not already available.
 
         $ $JAVA_HOME/bin/keytool -genkey -storetype pkcs12 -keyalg RSA -alias spark -keystore /path/to/keystore
 
