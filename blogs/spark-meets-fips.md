@@ -43,8 +43,8 @@ Currently, [Mozilla NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projec
             ```$ readelf -d /lib64/libnss3.so```
                    
 1.2. However, if the latest version of this library is desired and to enable FIPS module at the compile time - a
- build from source is required. Note that, FIPS module for NSS library is already installed in RHEL 7.7. Then the only
- benefit of building from the source is latest version.
+ build from source is required. Note that, FIPS module for NSS library is already installed in RHEL 7.8 with FIPS mode enabled.
+ So, it is not necessary to build from source.
 
   1.2.1. Download the latest version of Mozilla NSS library from their website and following the instructions provided.
   
@@ -316,7 +316,7 @@ IBM SDK, supported list of ciphersuites.
 [IBM SDK supported ciphersuites](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/jsse2Docs/ciphersuites.html)
 
 So, we used: `SSL_ECDHE_RSA_WITH_AES_256_GCM_SHA384` which is both FIPS approved and supported by IBM SDK.
- Also, it supported by many browsers including firefox and safari.
+ Also, supported by many browsers including `firefox` and `safari`.
 
 4. Setting up the keystore with IBM SDK.
 
