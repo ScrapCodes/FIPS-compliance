@@ -381,3 +381,6 @@ So, we used: `SSL_ECDHE_RSA_WITH_AES_256_GCM_SHA384` which is both FIPS approved
 
 
 1. How to configure IBM SDK to use cryptographic h/w accelerators and PKCS11. [link](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/pkcs11implDocs/hardwareconfig.html)
+2. Does the use of IBM SDK with FIPS mode, guarantees the FIPS compliance of application running on top of it? 
+    > The property does not verify that you are using the correct protocol or cipher suites that are required for FIPS 140-2 compliance
+[link](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/jsse2Docs/enablefips.html)
