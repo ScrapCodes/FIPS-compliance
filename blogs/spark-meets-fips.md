@@ -150,7 +150,7 @@ Should produce the output containing:
 
 1. Setup the correct JVM.
 
-            JAVA_HOME=<path_to_JDK>
+        export JAVA_HOME=<path_to_JDK>
             
 2. Configure Spark security.
         
@@ -215,7 +215,7 @@ Detailed documentation of IBM SDK FIPS Cryptographic module validation program.
 
 1. Setup the correct JVM.
 
-            JAVA_HOME=<path_to_IBM SDK>
+        export JAVA_HOME=<path_to_IBM SDK>
             
 2. Add the IBMJCEFIPS provider, to use IBM SDK support for FIPS.
 
