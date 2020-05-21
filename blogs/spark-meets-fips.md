@@ -2,13 +2,16 @@
 
 As developer community in enterprise companies like, health care, finance, telcom, retail, and manufacturing, are
  considering Apache Spark for their data processing, they are also looking for solutions to harden their enterprise
-  security, being FIPS compliant comes first to the mind. In principle, this guide will help any java based application
-  to meet FIPS compliance. 
+  security, being FIPS compliant comes first to the mind. In principle, this guide can will help any java based application
+  to meet FIPS compliance.
   
   For more information on specification related to FIPS compliance please visit: https://csrc.nist.gov/publications/fips
   
   Since this specification is periodically revised by the government, it is important to update this document to meet
   the currently applicable compliance specification.
+
+Cloud HSM and Keep your own key, take enterprise security to another level. We will briefly cover some relevant detail
+about these.
 
 _Note: A country specific export guidance for cryptographic software may be applicable, please review your country
  specific export guidance, before proceeding with FIPS setup._
@@ -16,7 +19,7 @@ _Note: A country specific export guidance for cryptographic software may be appl
 _Note: This document is suggestive of various configuration and address common development related issues, and does not
 guarantee a FIPS compliance._
 
-## Setting up the environment.
+## Setting up the environment for enabling FIPS for spark.
 
 ### Configuring RHEL 7.7 to be FIPS compliant.
 
@@ -37,7 +40,7 @@ This step is required because, java does not come with native implementation for
  with a wrapper, which can be linked with a supported linked library.
 
 Currently, [Mozilla NSS](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS) is the only widely used open source
-   implementation available. This library has a FIPS mode.
+   implementation available. This library has a FIPS enabled mode, but it is not a FIPS certified library.
 
 1.1. Usually this library comes pre-installed on a RHEL system. Verify it's existence by:        
             ```$ readelf -d /lib64/libnss3.so```
@@ -278,7 +281,7 @@ On examining the dump, the most interesting thread is,
         4XESTACKTRACE                at org/apache/spark/network/crypto/AuthEngine.initializeForAuth(AuthEngine.java:214)
     ......
     
-It is trying to access the native openssl library via a JNA method. My guess here is, JNA library is not compilled for Open J9.
+It is trying to access the native openssl library via a JNA method. My guess here is, JNA library is not compiled for Open J9.
 
 Fortunately, we do not need to do that, or try to debug the native C code, we turn off this optional module and use IBM SDK's
 support for FIPS. Which is also the recommended way in the case of IBM SDK, as it opens up the possibility of using IBM's cryptographic h/w
@@ -376,11 +379,22 @@ So, we used: `SSL_ECDHE_RSA_WITH_AES_256_GCM_SHA384` which is both FIPS approved
     spark.ssl.needClientAuth        false
     spark.ssl.protocol      TLSv1.2
 
+## Finally, can we have a docker image with all that packed in?
+Yes, checkout the ubi7/ubi8 based docker images for both Spark2 and Spark3 in [docker](docker/) folder.
+
+They are published for ready use on docker hub, as follows:
+
+1) Based on spark 2.4.5
+    a) scrapcodes/spark:v2.4.5-ubi7-ibm-sdk
+    b) scrapcodes/spark:v2.4.5-ubi7-ibm-sdk-fips-mode
+2) Based on spark 3.1.x
+    a) scrapcodes/v3.1.0-5052d9557d-ubi7-ibm-sdk-fips
+    b) scrapcodes/v3.1.0-5052d9557d-ubi7-ibm-sdk
 
 # References
-
 
 1. How to configure IBM SDK to use cryptographic h/w accelerators and PKCS11. [link](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/pkcs11implDocs/hardwareconfig.html)
 2. Does the use of IBM SDK with FIPS mode, guarantees the FIPS compliance of application running on top of it? 
     > The property does not verify that you are using the correct protocol or cipher suites that are required for FIPS 140-2 compliance
 [link](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/jsse2Docs/enablefips.html)
+3. Keep your own key. [link](https://www.ibm.com/cloud/blog/announcements/keep-your-own-key-for-kubernetes-apps-with-highly-sensitive-data)
