@@ -348,9 +348,9 @@ So, we used: `SSL_ECDHE_RSA_WITH_AES_256_GCM_SHA384` which is both FIPS approved
     
     # This is FIPS 140-2 compliant secure random implementation, that comes with IBM SDK.
     # Setting any value here has no effect at all. When FIPS mode is enabled,
-    # IBM SDK choses this algorithm for secure random, regardless of what user has configured.
+    # IBM SDK choses SHA2DRBG algorithm for secure random, regardless of what user has configured.
     # See section 2, for more details.
-    spark.io.encryption.commons.config.secure.random.java.algorithm  HASHDRBG 
+    spark.io.encryption.commons.config.secure.random.java.algorithm  SHA2DRBG 
     
     # It is important to use JAVA classes, otherwise apache commons crypto package will try to use 
     # native openssl jna library. This library does not play well with IBM SDK. See section 1.
@@ -365,7 +365,7 @@ So, we used: `SSL_ECDHE_RSA_WITH_AES_256_GCM_SHA384` which is both FIPS approved
     spark.io.encryption.keySizeBits 256
     spark.io.encryption.keygen.algorithm AES
     spark.io.encryption.commons.config.secure.random.classes    org.apache.commons.crypto.random.JavaCryptoRandom
-    spark.io.encryption.commons.config.secure.random.java.algorithm       HASHDRBG
+    spark.io.encryption.commons.config.secure.random.java.algorithm       SHA2DRBG
     spark.io.encryption.commons.config.cipher.classes   org.apache.commons.crypto.cipher.JceCipher
     spark.io.encryption.commons.config.cipher.transformation       AES/CTR/PKCS5Padding
     
@@ -385,10 +385,15 @@ Yes, checkout the ubi7/ubi8 based docker images for both Spark2 and Spark3 in [d
 They are published for ready use on docker hub, as follows:
 
 1) Based on spark 2.4.5
+    
     a) scrapcodes/spark:v2.4.5-ubi7-ibm-sdk
+    
     b) scrapcodes/spark:v2.4.5-ubi7-ibm-sdk-fips-mode
+
 2) Based on spark 3.1.x
+
     a) scrapcodes/v3.1.0-5052d9557d-ubi7-ibm-sdk-fips
+    
     b) scrapcodes/v3.1.0-5052d9557d-ubi7-ibm-sdk
 
 # References

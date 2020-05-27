@@ -21,12 +21,11 @@ i.e. all the data encryption and authentication is achieved by a single or a gro
 by a Cloud HSM instance. In this post, we will consider some salient features of `Keep your own key`, for large
 scale data processing engine like Apache Spark.
 
-
-
+TODO: add instructions for using Spark on Openshift with key as mounted secret.
 
 #References
 
 1. RSA Key Extraction via Low-Bandwidth Acoustic Cryptanalysis. Daniel et al. 
 [link](https://phys.org/news/2013-12-trio-rsa-encryption-keys-noise.html)
 2. https://en.wikipedia.org/wiki/Hardware_security_module
-3. 
+3. https://www.openshift.com
