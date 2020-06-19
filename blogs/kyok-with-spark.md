@@ -1,14 +1,14 @@
 # `Keep your own Key` and `FIPS compliance` with Apache Spark.
 
-Now that Cloud HSM is widely available, In other words, a Hardware Security Module available for Rent.
-What does it mean for us? How can we leverage this in our applications.
+A Cloud HSM - in other words, a Hardware Security Module available for Rent. Cloud HSM is widely
+ available, what does it mean for us? How can we leverage this in our applications.
 
 A Cloud HSM is a machine with specialized cryptographic processors or accelerators, that makes cryptography 
 both fast and secure. We have all heard about a very popular cryptanalysis attack, where an attacker extracts
-RSA keys, by simply observing the CPU FAN noise[1]. Since a dedicated Cryptographic co-processor helps in
-processing all the data related to cryptography, the CPU noise tracking becomes irrelevant. So this helps makes,
-Cloud HSM very secure for enterprise usage. It also helps take off load from CPU, for processing ciphering and
-deciphering of data and thus makes cryptography faster. 
+RSA keys, by simply observing the system noise[1]. Since a dedicated Cryptographic co-processor helps in
+processing all the data related to cryptography, many such tampering and cryptanalysis attack become less relevant.
+So this helps makes, Cloud HSM very secure for enterprise usage. It also helps take off load from CPU, for processing
+ciphering and deciphering of data and thus makes cryptography considerably faster. 
 
 There is another benefit of dedicated hardware for cryptography, i.e. they generate and store the keys on the device
  and keep them very safe. In this way, keys are not stored in the regular persistent storage like a system Hard drive 
@@ -21,8 +21,9 @@ i.e. all the data encryption and authentication is achieved by a single or a gro
 by a Cloud HSM instance. In this post, we will consider some salient features of `Keep your own key`, for large
 scale data processing engine like Apache Spark.
 
-TODO: add instructions for using Spark on Openshift with key as mounted secret.
+#1TODO: add instructions for using Spark on Openshift with key as mounted secret.
 
+#2 Accessing 
 #References
 
 1. RSA Key Extraction via Low-Bandwidth Acoustic Cryptanalysis. Daniel et al. 

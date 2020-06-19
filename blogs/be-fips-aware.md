@@ -33,10 +33,11 @@ without FIPS enabled?
 _This list cannot be exhaustive, and thus it is important to be fully aware of the standard and
 computer security in general._
 
-### 1. Use of a non compliant `https` or simply a `http`.
+### 1. Use of a non compliant unsupported cipher or simply a non encrypted transport (e.g. http).
 Downloading jars, or other sub-modules for your application via http, could lead to MIM attack, an
 attacker can simply intercept the traffic and see the jars and other source files to learn about your
-source code.
+source code. Therefore, FIPS has strict guidance available for approved ciphersuite for
+transport level security(e.g. TLS or SSL). 
 There are some https ciphersuites that are not in compliance with FIPS standard.
 
 For example, list of all the ciphersuites that use RSA key exchange supported by openssl:
@@ -106,11 +107,13 @@ For example:
 A spark job using an external service for model scoring of input data, can reveal the details of the data to both,
 any one who intercepts the message (i.e. MIM attack) and the owner of the Model scoring service itself.
 
-### 2. Using or accessing a cloud object storage and all the implications.
+### 2. Using or accessing a public cloud object storage and all the implications.
 
 A cloud object storage hosted on a public cloud, may store data in encrypted format, but it does not restrict the cloud 
 provider from accessing the data. And this can be a matter of concern for some government/non-government bodies for storing
-user data.
+user data. This can be overcome by either first encrypting the data with FIPS approved algorithm,
+and then storing on public cloud, never transmitting the keys. Or one can have a private cloud
+instance of object store and still using the encrypted data.
 
 A cloud object storage, fully compliant with FIPS standard may be used.
 
@@ -120,6 +123,16 @@ Hadoop has both encrypted and non encrypted modes of operation. If in encrypted 
 can be encrypted with a FIPS approved ciphersuite. 
 [HDFS Transparent encryption](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/TransparentEncryption.html)
 
+Sample with FIPS enabled.
+```scala
+
+```
+
+Sample without FIPS enabled.
+
+```scala
+
+```
 ### 4. Storing data on a non-encrypted/non-fips compliant NFS.
 
 NFS can be made FIPS compliant by turning on the FIPS mode on it, more details available with NFS provider.
