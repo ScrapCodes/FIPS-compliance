@@ -21,7 +21,6 @@ import java.io.*;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 
 class FileEncrypterDecrypter {
 
@@ -50,7 +49,6 @@ class FileEncrypterDecrypter {
         try (FileInputStream fileIn = new FileInputStream(fileName)) {
             byte[] fileIv = new byte[ivSize];
             fileIn.read(fileIv);
-            // cipher.init(Cipher.DECRYPT_MODE, secretKey, (AlgorithmParameterSpec)null, sr); //, new IvParameterSpec(fileIv));
             cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(fileIv));
 
             try (
