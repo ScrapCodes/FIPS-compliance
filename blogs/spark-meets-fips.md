@@ -69,7 +69,7 @@ containing `.so` libraries. Usually it is of the form, `nss_$version/dist/Linux3
 ### Step 2.
 
 #### Configure JVM to use the NSS libs.
-For this blog, oracle jdk 1.8 was used for testing the steps. The same steps might work with openjdk as well.
+For this section of blog, oracle jdk 1.8 was used for testing the steps. The same steps might work with openjdk as well.
 
 2.1 Create PKCS11 configuration file for JVM as follows.
     
@@ -379,27 +379,26 @@ So, we used: `SSL_ECDHE_RSA_WITH_AES_256_GCM_SHA384` which is both FIPS approved
     spark.ssl.needClientAuth        false
     spark.ssl.protocol      TLSv1.2
 
-## Finally, can we have a docker image with all that packed in?
-Yes, checkout the ubi7/ubi8 based docker images for both Spark2 and Spark3 in [docker](docker/) folder.
+### Is this enough to be FIPS compliant?
 
-They are published for ready use on docker hub, as follows:
+No, actually a user needs to be aware of the standard.
 
-1) Based on spark 2.4.5
+From the point of view of the configuration, an admin or a user himself can ensure he has got the right configuration by following the above guide.
+One can disable the non approved ciphersuite in `jre/lib/security/java.security` file, and Oracle has compiled a list of
+FIPS approved and non approved ciphersuite [3].
+
+Does the use of IBM SDK with FIPS mode, guarantees the FIPS compliance of application running on top of it? 
+
+    > The property does not verify that you are using the correct protocol or cipher suites that are required for FIPS 140-2 compliance
+
+See [2].
     
-    a) scrapcodes/spark:v2.4.5-ubi7-ibm-sdk
-    
-    b) scrapcodes/spark:v2.4.5-ubi7-ibm-sdk-fips-mode
-
-2) Based on spark 3.1.x
-
-    a) scrapcodes/v3.1.0-5052d9557d-ubi7-ibm-sdk-fips
-    
-    b) scrapcodes/v3.1.0-5052d9557d-ubi7-ibm-sdk
+What next? 
+[Common misconceptions with respect to FIPS mode enabled environment.](be-fips-aware.md)
 
 # References
 
 1. How to configure IBM SDK to use cryptographic h/w accelerators and PKCS11. [link](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/pkcs11implDocs/hardwareconfig.html)
-2. Does the use of IBM SDK with FIPS mode, guarantees the FIPS compliance of application running on top of it? 
-    > The property does not verify that you are using the correct protocol or cipher suites that are required for FIPS 140-2 compliance
-[link](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/jsse2Docs/enablefips.html)
-3. Keep your own key. [link](https://www.ibm.com/cloud/blog/announcements/keep-your-own-key-for-kubernetes-apps-with-highly-sensitive-data)
+2. [IBM Knowledgecenter reference.](https://www.ibm.com/support/knowledgecenter/en/SSYKE2_8.0.0/com.ibm.java.security.component.80.doc/security-component/jsse2Docs/enablefips.html)
+3. Oracle's guidance on FIPS compliance. [link](https://docs.oracle.com/cd/E53394_01/html/E54966/fips-refs.html)
+4. Keep your own key. [link](https://www.ibm.com/cloud/blog/announcements/keep-your-own-key-for-kubernetes-apps-with-highly-sensitive-data)

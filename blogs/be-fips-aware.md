@@ -18,8 +18,8 @@ without FIPS enabled?
     
 3. Why do we need FIPS in the First place? What does it bring along with it? Is it just a set of rules?
 
-    Today many OS and libraries have a FIPS mode available. Often, I face this question from others who think FIPS brings
-     in special powers to the software you are developing. Actually, FIPS is just a compliance standard, following all
+    Today, a few Operating Systems and libraries have a FIPS mode available. 
+    Actually, FIPS is just a compliance standard, following all
      the issued guidelines makes your application also compliant. FIPS is definitely not a special cryptographic suite,
      which is not available unless you have the FIPS mode enabled on your OS.
      
@@ -99,8 +99,8 @@ DES-CBC3-SHA            SSLv3 Kx=RSA      Au=RSA  Enc=3DES(168) Mac=SHA1
 
 The above comparision shows, that in FIPS mode, there are certain ciphersuites disabled, e.g. RC4-SHA or NULL-MD5 etc.
 
-This means, while an application might be using HTTPS, we still need to make sure, it is using the approved
-ciphersuite, for both key exchange and encryption.
+This means, when an application is using HTTPS, we still need to make sure, it is using the approved
+ciphersuite, for both key exchange and encryption. Having FIPS enabled environment may be helpful.
 
 For example:
 

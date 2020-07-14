@@ -1,6 +1,7 @@
-Apache Spark for Enterprise.
+# FIPS Standard and Apache Spark for processing big data.
 
-Series of blog on instructions and known issues, to make Apache Spark FIPS compliant.
+A series of blogs on achieving FIPS compliance for encryption and security while processing or analysing the big data.
 
-These instructions are helpful for making any Java application achieve the FIPS compliance.
+1. Details of configurations and setup required to achieve FIPS compliance. [spark-meets-fips.md](blogs/spark-meets-fips.md)
 
+2. Common misconceptions with respect to FIPS mode enabled environment. [be-fips-aware.md](blogs/be-fips-aware.md)
