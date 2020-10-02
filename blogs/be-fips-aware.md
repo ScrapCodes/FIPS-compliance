@@ -123,16 +123,7 @@ Hadoop has both encrypted and non encrypted modes of operation. If in encrypted 
 can be encrypted with a FIPS approved ciphersuite. 
 [HDFS Transparent encryption](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/TransparentEncryption.html)
 
-Sample with FIPS enabled.
-```scala
 
-```
-
-Sample without FIPS enabled.
-
-```scala
-
-```
 ### 4. Storing data on a non-encrypted/non-fips compliant NFS.
 
 NFS can be made FIPS compliant by turning on the FIPS mode on it, more details available with NFS provider.
